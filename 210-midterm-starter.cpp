@@ -267,9 +267,19 @@ int main() {
 
             }
         }
+        // 20% chance the customer at the end of the line leave
         if (rand() % 100 < 20){
             cout << line.get_tail_data() << " is leaving the line";
             line.pop_back();
+        }
+
+        //10% chance a VIP customer skips the line
+        if (rand() % 100 < 10){
+            if (!names.empty()){
+                string vip_customer = names[rand() % names.size()];
+                cout << vip_customer << "goes straight to the counter";
+            }
+            
         }
       
     }
