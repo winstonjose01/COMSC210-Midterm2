@@ -207,6 +207,13 @@ public:
         }
         cout << endl;
     }
+
+    string get_tail_data(){
+        if (tail){
+            return tail->data;
+        }
+        return (" ");
+    }
 };
 // This function reads names from names.txt
 // arguments: a string (filename)
@@ -260,13 +267,11 @@ int main() {
 
             }
         }
-
-        cout << "Resulting line: " << endl;
-        line.print();
-        time_step++;
-
-    // Randome
-
+        if (rand() % 100 < 20){
+            cout << line.get_tail_data() << " is leaving the line";
+            line.pop_back();
+        }
+      
     }
 
     return 0;
