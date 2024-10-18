@@ -213,24 +213,34 @@ vector <string> read_names(string filename){
     if(!file){
         cout << "Cound not open the file" << endl;
     }
-    while (getline(file,name))
+    while (getline(file,name)){
+        names.push_back(name);
+    }
+    return names;
 }
 
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
     DoublyLinkedList line;
-    vector <string> names;
+    vector <string> names = read_names("names.txt");
     int time_step = 1;
 
     // Add 5 customers when the store opens
-    names = read_names("names.txt");
     cout << "Store opens: " << endl;
-    for (int i = 0; i < 5 ; i++){
-        line .push_back(names[i]);
+    for (int i = 0; i < 5 && i < names.size() ; i++){
+        line.push_back(names[i]);
+        cout << names[i] << "joined the line" << endl;
+    }
+    cout << "Resulting line: ";
+    line.print();
 
+    // Simulate the steps
+    while (time_step <= 10) {
+        cout << "Time step #" << time_step << ":" << endl;
     }
 
+    
     
     return 0;
 }
