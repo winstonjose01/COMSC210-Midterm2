@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <fstream>
+#include <random>
 using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
@@ -203,8 +206,30 @@ public:
     }
 };
 
+vector <string> read_names(string filename){
+    ifstream file (filename);
+    vector <string> names;
+    string name;
+    if(!file){
+        cout << "Cound not open the file" << endl;
+    }
+    while (getline(file,name))
+}
+
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
+
+    DoublyLinkedList line;
+    vector <string> names;
+    int time_step = 1;
+
+    // Add 5 customers when the store opens
+    names = read_names("names.txt");
+    cout << "Store opens: " << endl;
+    for (int i = 0; i < 5 ; i++){
+        line .push_back(names[i]);
+
+    }
 
     
     return 0;
