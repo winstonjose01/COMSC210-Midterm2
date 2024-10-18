@@ -6,6 +6,9 @@ using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
+//Function prototype
+vector <string> read_names(string &);
+
 class DoublyLinkedList {
 private:
     struct Node {
@@ -56,7 +59,7 @@ public:
         temp->next = newNode;
     }
 
-    void delete_val(int value) {
+    void delete_val(string value) {
         if (!head) return;
 
         Node* temp = head;
@@ -116,7 +119,7 @@ public:
         delete temp;
     }
 
-    void push_back(int v) {
+    void push_back(string v) {
         Node* newNode = new Node(v);
         if (!tail)
             head = tail = newNode;
@@ -127,7 +130,7 @@ public:
         }
     }
     
-    void push_front(int v) {
+    void push_front(string v) {
         Node* newNode = new Node(v);
         if (!head)
             head = tail = newNode;
@@ -186,7 +189,7 @@ public:
             return;
         }
         while (current) {
-            cout << current->data << " ";
+            cout << "\t" << current->data << "\n";
             current = current->next;
         }
         cout << endl;
@@ -205,22 +208,24 @@ public:
         cout << endl;
     }
 };
-
+// This function reads names from names.txt
+// arguments: a string (filename)
+// returns: a vector with names
 vector <string> read_names(string filename){
-    ifstream file (filename);
-    vector <string> names;
-    string name;
-    if(!file){
+    ifstream file (filename);   // Input filestream
+    vector <string> names;      // Initialize a vector to store names
+    string name;        
+    if(!file){                  // Check if the file was succesfully opened
         cout << "Cound not open the file" << endl;
     }
-    while (getline(file,name)){
-        names.push_back(name);
+    while (getline(file,name)){     //Read lines from the file until the end of file
+        names.push_back(name);      // Add each name to the vector
     }
     return names;
 }
 
 int main() {
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
+    //cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
     DoublyLinkedList line;
     vector <string> names = read_names("names.txt");
@@ -230,12 +235,12 @@ int main() {
     cout << "Store opens: " << endl;
     for (int i = 0; i < 5 && i < names.size() ; i++){
         line.push_back(names[i]);
-        cout << names[i] << "joined the line" << endl;
+        cout << "\t" << names[i] << " joined the line" << endl;
     }
-    cout << "Resulting line: ";
+    cout << "Resulting line: " << endl;
     line.print();
 
-    srand(time(0));
+    srand(time(0)); // Seed the random generator
     // Simulate the steps
     while (time_step <= 10) {
         cout << "Time step #" << time_step << ":" << endl;
@@ -256,7 +261,7 @@ int main() {
             }
         }
 
-        cout << "Resulting line: ";
+        cout << "Resulting line: " << endl;
         line.print();
         time_step++;
 
