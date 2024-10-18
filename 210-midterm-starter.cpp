@@ -9,10 +9,10 @@ const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 class DoublyLinkedList {
 private:
     struct Node {
-        int data;
+        string data;
         Node* prev;
         Node* next;
-        Node(int val, Node* p = nullptr, Node* n = nullptr) {
+        Node(string val, Node* p = nullptr, Node* n = nullptr) {
             data = val; 
             prev = p;
             next = n;
@@ -25,7 +25,7 @@ private:
 public:
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
-    void insert_after(int value, int position) {
+    void insert_after(string value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
@@ -235,12 +235,34 @@ int main() {
     cout << "Resulting line: ";
     line.print();
 
+    srand(time(0));
     // Simulate the steps
     while (time_step <= 10) {
         cout << "Time step #" << time_step << ":" << endl;
+
+        int action = rand() % 100;  // Random number between 0-99
+
+        // A customer being helped at the beginning of the line(40%)
+        if (action < 40){
+            line.pop_front();
+        }
+        // A new customer joining the end of the line(60%)
+        else if(action < 100){
+            if (!names.empty()){
+                string new_customer = names[rand() % names.size()]; // Pick a name
+                line.push_back(new_customer);
+                cout << new_customer << " joined the line" << endl;
+
+            }
+        }
+
+        cout << "Resulting line: ";
+        line.print();
+        time_step++;
+
+    // Randome
+
     }
 
-    
-    
     return 0;
 }
